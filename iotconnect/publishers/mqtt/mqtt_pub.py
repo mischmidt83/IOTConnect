@@ -19,7 +19,8 @@ class MQTTPublisher(Publisher):
         self._topic_prefix = self._config['topic_prefix']
         self._max_connection_retries = self._config['connection_retries']
         self._qos = 0 if 'qos' not in self._config else self._config['qos']
-        self._retain = True if 'retain' not in self._config else self._config['retain'].lower() == 'true'
+        self._retain = True if 'retain' not in self._config else self._config['retain']
+        self._tls = True if 'tls' not in self._config else self._config['tls']
         self._connection_retries = 0
 
     def initialize(self):
@@ -38,7 +39,8 @@ class MQTTPublisher(Publisher):
             self._mqtt_client.on_disconnect = self._on_disconnect
 
             # Set tls
-            self._mqtt_client.tls_set()
+            if self._tls:
+                self._mqtt_client.tls_set()
             # Set user and password
             self._mqtt_client.username_pw_set(self._user, self._password)
             # Enable MQTT logger
