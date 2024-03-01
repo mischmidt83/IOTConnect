@@ -47,7 +47,7 @@ class MQTTPublisher(Publisher):
             self._mqtt_client.enable_logger(self._log)
             # Start loop to process callbacks
             self._mqtt_client.loop_start()
-            # Conect to MQTT server
+            # Connect to MQTT server
             while not self._mqtt_client.connected_flag and self._connection_retries < self._max_connection_retries:
                 self._log.debug("Trying to connect to MQTT server (%s)...", self._connection_retries + 1)
                 self._mqtt_client.connect(self._broker, self._port)
