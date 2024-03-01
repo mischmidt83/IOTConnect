@@ -56,7 +56,7 @@ class MQTTPublisher(Publisher):
 
             if self._connection_retries >= self._max_connection_retries:
                 self._log.error("Could not connect to MQTT. Max attempts (%s) exceeded.", self._max_connection_retries)
-                self._log.warn("--- %s could not be initialized ---", self.__class__.__name__)
+                self._log.warning("--- %s could not be initialized ---", self.__class__.__name__)
                 raise Exception("Could not connect to MQTT. Max attempts ({}) exceeded."
                                 .format(self._max_connection_retries))
             else:
@@ -74,12 +74,12 @@ class MQTTPublisher(Publisher):
             client.connected_flag = True  # set flag
             self._log.info("Successfully connected to MQTT broker")
         else:
-            self._log.warn("Could not connect to MQTT broker. Return code: %s", rc)
+            self._log.warning("Could not connect to MQTT broker. Return code: %s", rc)
 
     def _on_disconnect(self, client, userdata, rc):
         """MQTT function for on_disconnect callback."""
         client.connected_flag = False  # set flag
-        self._log.warn("Disconnected from MQTT broker")
+        self._log.warning("Disconnected from MQTT broker")
 
     def publish(self, context, data):
         self._log.info("Publish: context: '%s', payload: '%s'",
