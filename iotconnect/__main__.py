@@ -79,7 +79,7 @@ def main():
                 state_info = {'timestamp': int(round(time.time())),
                               'state': 'running'}
                 monitors_state_info = []
-                # Check monitors statate and start them if stopped
+                # Check monitors state and start them if stopped
                 for mon in Monitors:
                     status = mon.check_thread()
                     if not status:
