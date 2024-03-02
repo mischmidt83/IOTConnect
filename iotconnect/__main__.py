@@ -103,7 +103,7 @@ def main():
                         logger.error('Error publishing with %s: %s',
                                      pub.__class__.__name__, ex)
 
-                # Wait some time before cheking again the monitors
+                # Wait some time before checking again the monitors
                 time.sleep(15)
         except (KeyboardInterrupt, SystemExit):  # when you press ctrl+c
             logger.warn('IOTConnect execution cancelled by user.')
