@@ -38,6 +38,9 @@ def main():
         except json.decoder.JSONDecodeError as err:
             raise Exception('Error parsing config file: %s', err)
 
+        # configuration
+        interval = 15 if 'interval' not in config else int(config['interval'])
+
         # Load the publishers
         logger.info('=== Loading publishers ===')
         for pub_config in config['publishers']:
@@ -104,7 +107,7 @@ def main():
                                      pub.__class__.__name__, ex)
 
                 # Wait some time before checking again the monitors
-                time.sleep(15)
+                time.sleep(max(15, interval))
         except (KeyboardInterrupt, SystemExit):  # when you press ctrl+c
             logger.warn('IOTConnect execution cancelled by user.')
             main_running = False

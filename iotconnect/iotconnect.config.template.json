@@ -1,4 +1,5 @@
 {
+    "interval": 15,
     "publishers":[
         {
             "class": "iotconnect.publishers.mqtt.MQTTPublisher",
